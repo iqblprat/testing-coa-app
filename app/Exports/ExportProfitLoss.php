@@ -69,6 +69,8 @@ class ExportProfitLoss implements FromCollection, WithStyles, ShouldAutoSize
         }, $this->months);
     }
 
+
+
     public function styles(\PhpOffice\PhpSpreadsheet\Worksheet\Worksheet $sheet): array
     {
         $dataRowsCount = 0;
