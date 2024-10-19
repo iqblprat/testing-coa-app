@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2024 at 01:34 PM
+-- Generation Time: Oct 19, 2024 at 05:00 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -38,10 +38,24 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(2, '2024_10_16_114850_create_category_coa', 1),
-(3, '2024_10_16_114949_create_chart_of_account', 1),
-(4, '2024_10_16_120239_create_transaksi', 1);
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1),
+(3, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(4, '2024_10_16_114850_create_category_coa', 1),
+(5, '2024_10_16_114949_create_chart_of_account', 1),
+(6, '2024_10_16_120239_create_transaksi', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -73,23 +87,25 @@ CREATE TABLE `tb_chart_of_account` (
   `kode` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `kategori_id` bigint(20) UNSIGNED NOT NULL,
+  `status` tinyint(4) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tb_chart_of_account`
 --
 
-INSERT INTO `tb_chart_of_account` (`id`, `kode`, `nama`, `kategori_id`, `created_at`, `updated_at`) VALUES
-(14, '401', 'Gaji Karyawan', 1, '2024-10-18 05:46:05', '2024-10-18 05:46:05'),
-(15, '402', 'Gaji Ketua MPR', 1, '2024-10-18 05:46:19', '2024-10-18 05:46:19'),
-(16, '403', 'Profit Trading', 2, '2024-10-18 05:46:39', '2024-10-18 05:46:39'),
-(17, '601', 'Biaya Sekolah', 3, '2024-10-18 05:46:54', '2024-10-18 05:46:54'),
-(18, '602', 'Bensin', 4, '2024-10-18 05:47:05', '2024-10-18 05:47:05'),
-(19, '603', 'Parkir', 4, '2024-10-18 05:47:23', '2024-10-18 05:47:23'),
-(20, '604', 'Makan Siang', 11, '2024-10-18 05:47:37', '2024-10-18 05:47:37'),
-(21, '605', 'Makanan Pokok Bulanan', 11, '2024-10-18 05:47:57', '2024-10-18 05:47:57');
+INSERT INTO `tb_chart_of_account` (`id`, `kode`, `nama`, `kategori_id`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '401', 'Gaji Karyawan', 1, 1, '2024-10-19 14:51:06', '2024-10-19 14:51:06', NULL),
+(2, '402', 'Gaji Ketua MPR', 1, 1, '2024-10-19 14:51:06', '2024-10-19 14:51:06', NULL),
+(3, '403', 'Profit Trading', 2, 1, '2024-10-19 14:51:06', '2024-10-19 14:51:06', NULL),
+(4, '601', 'Biaya Sekolah', 3, 1, '2024-10-19 14:51:06', '2024-10-19 14:51:06', NULL),
+(5, '602', 'Bensin', 4, 1, '2024-10-19 14:51:06', '2024-10-19 14:51:06', NULL),
+(6, '603', 'Parkir', 4, 1, '2024-10-19 14:51:06', '2024-10-19 14:51:06', NULL),
+(7, '604', 'Makan Siang', 5, 1, '2024-10-19 14:51:06', '2024-10-19 14:51:06', NULL),
+(8, '605', 'Makanan Pokok Bulanan', 5, 1, '2024-10-19 14:51:06', '2024-10-19 14:51:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -100,21 +116,22 @@ INSERT INTO `tb_chart_of_account` (`id`, `kode`, `nama`, `kategori_id`, `created
 CREATE TABLE `tb_kategori_coa` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nama` varchar(255) NOT NULL,
+  `status` tinyint(4) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tb_kategori_coa`
 --
 
-INSERT INTO `tb_kategori_coa` (`id`, `nama`, `created_at`, `updated_at`) VALUES
-(1, 'Salary', NULL, '2024-10-17 05:18:19'),
-(2, 'Other Income', NULL, NULL),
-(3, 'Family Expense', NULL, '2024-10-17 16:35:36'),
-(4, 'Transport Expense', NULL, NULL),
-(11, 'Meal Expenses', '2024-10-17 03:05:30', '2024-10-17 05:18:30'),
-(13, 'Other Expense', '2024-10-17 16:35:43', '2024-10-18 05:44:58');
+INSERT INTO `tb_kategori_coa` (`id`, `nama`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Salary', 1, '2024-10-19 14:51:06', '2024-10-19 14:51:06', NULL),
+(2, 'Other Income', 1, '2024-10-19 14:51:06', '2024-10-19 14:51:06', NULL),
+(3, 'Family Expense', 1, '2024-10-19 14:51:06', '2024-10-19 14:51:06', NULL),
+(4, 'Transport Expense', 1, '2024-10-19 14:51:06', '2024-10-19 14:51:06', NULL),
+(5, 'Meal Expense', 1, '2024-10-19 14:51:06', '2024-10-19 14:51:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -129,18 +146,41 @@ CREATE TABLE `tb_transaksi` (
   `deskripsi` varchar(255) NOT NULL,
   `debit` decimal(15,2) DEFAULT NULL,
   `credit` decimal(15,2) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `tb_transaksi`
 --
 
-INSERT INTO `tb_transaksi` (`id`, `tanggal`, `coa_id`, `deskripsi`, `debit`, `credit`, `created_at`, `updated_at`) VALUES
-(11, '2022-01-01', 14, 'Gaji di Perusahaan A', 0.00, 5000000.00, '2024-10-18 05:48:36', '2024-10-18 05:48:36'),
-(12, '2022-01-02', 15, 'Gaji Ketum', 0.00, 7000000.00, '2024-10-18 05:49:12', '2024-10-18 05:49:12'),
-(13, '2022-01-10', 18, 'Bensin Anak', 25000.00, 0.00, '2024-10-18 05:49:49', '2024-10-18 05:49:49');
+INSERT INTO `tb_transaksi` (`id`, `tanggal`, `coa_id`, `deskripsi`, `debit`, `credit`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, '2024-10-25', 1, 'Gaji', 0.00, 5000000.00, 1, '2024-10-19 14:51:14', '2024-10-19 14:51:19', '2024-10-19 14:51:19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'admin', 'admin@example.com', '$2y$10$0kHoiNcalIu51wgLHjrMjeLxRk8tF3WknVPP0AGTers8z0F5IOPwC', '2024-10-19 14:51:06', '2024-10-19 14:51:06');
 
 --
 -- Indexes for dumped tables
@@ -151,6 +191,12 @@ INSERT INTO `tb_transaksi` (`id`, `tanggal`, `coa_id`, `deskripsi`, `debit`, `cr
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -181,6 +227,14 @@ ALTER TABLE `tb_transaksi`
   ADD KEY `tb_transaksi_coa_id_foreign` (`coa_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_username_unique` (`username`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -188,7 +242,7 @@ ALTER TABLE `tb_transaksi`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -200,19 +254,25 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `tb_chart_of_account`
 --
 ALTER TABLE `tb_chart_of_account`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_kategori_coa`
 --
 ALTER TABLE `tb_kategori_coa`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

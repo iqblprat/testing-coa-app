@@ -65,7 +65,7 @@ class ExportProfitLoss implements FromCollection, WithStyles, ShouldAutoSize
     protected function getMonthlyData($data)
     {
         return array_map(function ($month) use ($data) {
-            return number_format($data[$month] ?? 0, 2, ',', '.');
+            return 'Rp ' . number_format($data[$month] ?? 0, 2, ',', '.');
         }, $this->months);
     }
 
