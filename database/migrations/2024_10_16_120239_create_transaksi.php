@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('tb_transaksi', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->date('tanggal');
             $table->unsignedBigInteger('coa_id');
             $table->foreign('coa_id')->references('id')->on('tb_chart_of_account')->onDelete('cascade');

@@ -14,6 +14,7 @@ class Transaksi extends Model
     protected $table = "tb_transaksi";
     protected $fillable = [
         'tanggal',
+        'user_id',
         'coa_id',
         'deskripsi',
         'debit',
@@ -25,6 +26,11 @@ class Transaksi extends Model
     public function coa()
     {
         return $this->belongsTo(ChartOfAccount::class, 'coa_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }

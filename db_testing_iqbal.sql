@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2024 at 05:00 PM
+-- Generation Time: Oct 19, 2024 at 05:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -180,7 +180,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin', 'admin@example.com', '$2y$10$0kHoiNcalIu51wgLHjrMjeLxRk8tF3WknVPP0AGTers8z0F5IOPwC', '2024-10-19 14:51:06', '2024-10-19 14:51:06');
+(1, 'John Doe', 'admin', 'admin@example.com', '$2y$10$0kHoiNcalIu51wgLHjrMjeLxRk8tF3WknVPP0AGTers8z0F5IOPwC', '2024-10-19 14:51:06', '2024-10-19 14:51:06');
 
 --
 -- Indexes for dumped tables

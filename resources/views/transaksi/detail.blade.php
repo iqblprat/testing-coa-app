@@ -43,6 +43,10 @@
                         <label for="updated_at" class="form-label">Terakhir diubah</label>
                         <span class="form-control">{{ $transaksi->updated_at }}</span>
                     </div>
+                    <div class="mb-3">
+                        <label for="user" class="form-label">User yang Melakukan Transaksi</label>
+                        <span class="form-control">{{ $transaksi->user->name }}</span>
+                    </div>
                 </div>
             </div>
         </div>

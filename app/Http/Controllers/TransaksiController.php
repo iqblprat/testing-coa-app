@@ -34,6 +34,7 @@ class TransaksiController extends Controller
 
     public function store(Request $request)
     {
+        // Validasi input
         $request->validate([
             'tanggal' => 'required|date',
             'coa_id' => 'required|exists:tb_chart_of_account,id',
@@ -42,14 +43,25 @@ class TransaksiController extends Controller
             'credit' => 'nullable|numeric',
         ]);
 
-        $data = $request->all();
-        $data['status'] = 1;
+        // Pastikan user sedang login
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Anda harus login untuk melakukan transaksi.');
+        }
 
+        // Mengambil data input dan menambahkan user_id dari session
+        $data = $request->except('_token');  // Mengambil data kecuali _token
+        $data['status'] = 1;
+        $data['user_id'] = Auth::id();
+
+        // Buat transaksi baru
         Transaksi::create($data);
 
+        // Redirect setelah transaksi berhasil
         return redirect()->route('transaksi.index')
-                         ->with('success_store', 'Data Transaksi berhasil ditambahkan.');
+                        ->with('success_store', 'Data Transaksi berhasil ditambahkan.');
     }
+
+
 
     public function edit($id)
     {
